@@ -1,0 +1,5 @@
+numpy
+torch
+transformers
+requests
+yt-dlp          # corpus harvest only (--harvest)

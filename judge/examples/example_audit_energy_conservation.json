@@ -1,0 +1,177 @@
+{
+  "scores": {
+    "accuracy": 1.0,
+    "logic": 1.0,
+    "adaptability": 3.7,
+    "engagement": 3.03
+  },
+  "agent1_analysis": {
+    "primary_language": "english",
+    "teaching_mode": "Conceptual",
+    "content_map": [
+      {
+        "timestamp": "00:00",
+        "topic": "Instructional Meta-commentary",
+        "detail_level": "Mentioned",
+        "description": "The narrator advises the learner to be careful to use appropriate vocabulary."
+      },
+      {
+        "timestamp": "00:03",
+        "topic": "Big Concept: Conservation",
+        "detail_level": "Mentioned",
+        "description": "Introduction of the overarching theme of 'Conservation' without further definition or context."
+      }
+    ],
+    "potential_issues": [
+      {
+        "timestamp": "00:00",
+        "description": "The video is only 7 seconds long, whereas the metadata specifies a 'Focus Time' of 20 minutes. It fails to cover the 'Core Concept: Energy Conservation in a Closed System' promised in the metadata.",
+        "confidence": 1.0,
+        "evidence_type": "Title-Content Mismatch",
+        "category": "accuracy"
+      },
+      {
+        "timestamp": "00:00",
+        "description": "The video contains no actual scientific content, definitions, or explanations suitable for a Twelfth Grade (AP/IB) level, despite the metadata claims.",
+        "confidence": 1.0,
+        "evidence_type": "Pedagogical Depth Gap",
+        "category": "accuracy"
+      }
+    ],
+    "presentation_analysis": {
+      "visual_style": "Digital Slides",
+      "ai_slop_detected": [],
+      "audio_pacing": "Moderate",
+      "audio_transition_audit": {
+        "vocal_consistency": "Consistent TTS narration throughout the 7-second clip.",
+        "glitches": []
+      },
+      "visual_content_alignment": {
+        "score": "High",
+        "observation": "The on-screen text and key terms list perfectly match the spoken narration."
+      },
+      "visual_accessibility_audit": {
+        "issues": []
+      }
+    },
+    "observation_summary": "The video is a 7-second introductory fragment or placeholder. It does not provide any educational instruction on Energy Conservation or closed systems as suggested by its metadata. It merely states a meta-instruction about vocabulary and identifies the broad topic of 'Conservation'.",
+    "curriculum_coverage_checklist": []
+  },
+  "agent2_report": {
+    "primary_language": "english",
+    "content_overview": {
+      "teaching_mode": "Conceptual",
+      "content_map_size": 2
+    },
+    "pedagogical_depth": {
+      "scaffolding_failure_level": -3,
+      "scaffolding_failure_evidence": "The video provides no instruction, intuition, or conceptual scaffolding; it is a 7-second introductory fragment that merely mentions the topic.",
+      "pure_calculation_bias_level": 0,
+      "pure_calculation_bias_evidence": "No calculations are present in this fragment."
+    },
+    "completeness": {
+      "content_completeness_level": -3,
+      "content_completeness_evidence": "The video is only 7 seconds long and fails to cover any core concepts of conservation, missing the promised 'Energy Conservation in a Closed System' entirely.",
+      "explanatory_depth_level": -3,
+      "explanatory_depth_evidence": "No depth is provided; the topic is merely mentioned as a title without any explanation or definition.",
+      "key_learning_points_coverage": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    "accuracy_flags": {
+      "title_depth_mismatch_level": -3,
+      "title_depth_mismatch_evidence": "Fundamental mismatch: the title and metadata promise a full lesson on Conservation, but the video is a 7-second placeholder or fragment.",
+      "visual_alignment_issue_level": 0,
+      "visual_alignment_issue_evidence": "The visuals match the limited narration provided in the 7-second clip.",
+      "critical_fact_error_count": 0,
+      "critical_fact_error_evidence": "No specific scientific claims were made to be incorrect, though the content is entirely missing.",
+      "minor_slip_count": 0,
+      "minor_slip_evidence": "None detected in the brief duration."
+    },
+    "logic_flags": {
+      "causal_inconsistency_count": 0,
+      "information_overload_count": 0
+    },
+    "verified_errors": [
+      {
+        "timestamp": "00:00",
+        "type": "accuracy",
+        "severity": "critical",
+        "description": "The video is a 7-second fragment that fails to provide any of the promised educational content on Energy Conservation or closed systems."
+      }
+    ],
+    "scoring_rationale": "The video is a 7-second placeholder or fragment that contains no educational content. It fails to address the topic of Conservation as promised by the title and metadata, resulting in severe deductions for completeness, depth, and title/depth mismatch.",
+    "accuracy_score": 1.0,
+    "logic_score": 1.0,
+    "score_breakdown": {
+      "accuracy_steps": "Base: 4.0 → Scaffolding Failure: -1.5 → Content Completeness: -1.5 → Explanatory Depth: -2.0 → Title/Depth Mismatch: -4.0 → = 1.00",
+      "logic_steps": "Base: 4.0 → Scaffolding Failure Cap: max 2.0 → Scaffolding Failure: -1.5 → Content Completeness: -1.5 → Explanatory Depth: -2.0 → = 1.00"
+    }
+  },
+  "agent3_simulation": {
+    "experiential_context": {
+      "signaling_effectiveness": "The dynamic 'Key terms' sidebar provides excellent real-time signaling that aligns perfectly with the narration, helping the student identify core concepts immediately. However, it is currently populated with meta-instructional words in the first two seconds.",
+      "pacing_analysis": "The 7-second introduction is appropriately paced for a 12th-grade student, allowing enough time to read the title and key terms without dragging or feeling rushed.",
+      "visual_quality_assessment": "The layout is professional and high-contrast, but the visual experience is significantly marred by unedited AI artifacts, such as markdown symbols and cut-off teacher-facing metadata.",
+      "cognitive_friction_points": [
+        {
+          "timestamp": "00:00",
+          "issue": "Meta-instructional content",
+          "reason": "The video begins with the AI's internal instructions ('Be careful to use appropriate vocabulary') being read aloud and displayed as text, which is irrelevant to the physics topic."
+        },
+        {
+          "timestamp": "00:03",
+          "issue": "Unedited AI artifacts",
+          "reason": "Visible markdown symbols ('###') and cut-off metadata ('Bloom's Taxonomy: Understand, A...') create visual noise and look unprofessional to an analytical learner."
+        }
+      ],
+      "positive_moment": {
+        "timestamp": "00:03",
+        "what_works": "The dynamic 'Key terms' sidebar is an excellent organizational tool for analytical 12th graders, providing a clear, real-time summary of the lesson's focus."
+      }
+    },
+    "audit_log": {
+      "adaptability_flags": {
+        "jargon_overload_level": -1,
+        "jargon_evidence": "The term 'Bloom's Taxonomy' is included in the header without explanation; while metadata, it is unexplained jargon for a student viewer.",
+        "prerequisite_gap_level": 0,
+        "prerequisite_evidence": "The video starts at the foundational level of the concept.",
+        "pacing_mismatch_level": 0,
+        "pacing_evidence": "The 7-second duration for an intro slide is appropriate.",
+        "visual_accessibility_level": 0,
+        "accessibility_evidence": "High contrast text on a dark background is easy to read.",
+        "missing_scaffolding_level": 0,
+        "scaffolding_evidence": "As an introduction, it sets the stage adequately.",
+        "ineffective_visual_representation_level": 0,
+        "ineffective_visual_evidence": "The slide layout effectively organizes the title and key terms."
+      },
+      "engagement_flags": {
+        "monotone_audio_level": 0,
+        "monotone_evidence": "The TTS narration is clear and functional for an introduction.",
+        "ai_generated_fatigue_level": -3,
+        "ai_fatigue_evidence": "Multiple instances of unedited AI output: meta-instructional dialogue at 00:00, markdown symbols at 00:03, and cut-off metadata text.",
+        "visual_clutter_level": -1,
+        "clutter_evidence": "The top header is crowded with teacher-facing metadata (Grade, Focus Time, Bloom's) that is irrelevant to the student.",
+        "disconnect_level": 0,
+        "disconnect_evidence": "The audio and visual text are perfectly aligned, even if the content itself is meta-instructional.",
+        "decorative_eye_candy_level": 0,
+        "decorative_eye_candy_evidence": "No distracting or empty visual spectacle.",
+        "visual_signaling_level": 1,
+        "visual_signaling_evidence": "The 'Key terms' box provides precise, timed signaling that enhances the student's ability to track core concepts."
+      }
+    },
+    "top_fix_suggestion": "Remove all teacher-facing metadata and AI artifacts (markdown symbols, meta-instructional dialogue) to create a clean, student-centric introduction focused purely on the physics content.",
+    "subjective_scores": {
+      "adaptability": {
+        "score": 3.7,
+        "calculation": "Base: 4.0 → Jargon Overload: -0.3 → = 3.70"
+      },
+      "engagement": {
+        "score": 3.03,
+        "calculation": "Base: 4.0 → AI Generated Fatigue: -1.0 → Visual Clutter: -0.3 → = 3.03 (+1×1)"
+      }
+    }
+  }
+}

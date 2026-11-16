@@ -1,0 +1,204 @@
+{
+  "scores": {
+    "accuracy": 4.8,
+    "logic": 4.75,
+    "adaptability": 4.25,
+    "engagement": 4.67
+  },
+  "agent1_analysis": {
+    "primary_language": "english",
+    "teaching_mode": "Conceptual",
+    "content_map": [
+      {
+        "timestamp": "00:00",
+        "topic": "Introduction to Trigonometry Beyond Right Triangles",
+        "detail_level": "Mentioned",
+        "description": "Introduction to the limitations of SOH CAH TOA and the need for a broader definition of trig functions for angles greater than 90 degrees."
+      },
+      {
+        "timestamp": "00:25",
+        "topic": "Angles in Standard Position",
+        "detail_level": "Defined",
+        "description": "Definition of standard position: vertex at origin (0,0), initial arm on positive x-axis, with counter-clockwise rotation as positive and clockwise as negative."
+      },
+      {
+        "timestamp": "00:55",
+        "topic": "The Unit Circle",
+        "detail_level": "Defined",
+        "description": "Definition of the unit circle as a circle centered at (0,0) with a radius of exactly 1 unit."
+      },
+      {
+        "timestamp": "01:24",
+        "topic": "Sine and Cosine as Coordinates",
+        "detail_level": "Explained",
+        "description": "Derivation showing that for a point P(x,y) on the unit circle, cos(theta) = x and sin(theta) = y because the hypotenuse is 1."
+      },
+      {
+        "timestamp": "02:22",
+        "topic": "Cardinal Angles",
+        "detail_level": "Worked Example (Conceptual)",
+        "description": "Evaluating sine and cosine values at 0, 90, 180, and 270 degrees based on their coordinates on the unit circle."
+      },
+      {
+        "timestamp": "03:03",
+        "topic": "Radians",
+        "detail_level": "Defined",
+        "description": "Definition of a radian as the angle where arc length equals the radius, noting that a full circle is 2*pi radians."
+      },
+      {
+        "timestamp": "03:45",
+        "topic": "Generating the Sine Graph",
+        "detail_level": "Intuition/Analogy",
+        "description": "Visual demonstration of how the y-coordinate of a point moving around the unit circle traces out a sine wave."
+      },
+      {
+        "timestamp": "04:21",
+        "topic": "Generating the Cosine Graph",
+        "detail_level": "Intuition/Analogy",
+        "description": "Visual demonstration of how the x-coordinate of a point moving around the unit circle traces out a cosine wave."
+      },
+      {
+        "timestamp": "04:55",
+        "topic": "Trigonometry in Motion: Waves of Life",
+        "detail_level": "Mentioned",
+        "description": "Real-world examples of periodic phenomena modeled by trig functions, including sound waves, light waves, and tides."
+      },
+      {
+        "timestamp": "05:29",
+        "topic": "Precision and Navigation",
+        "detail_level": "Mentioned",
+        "description": "Applications of trigonometry in GPS systems, engineering, astronomy, and robotics."
+      },
+      {
+        "timestamp": "06:07",
+        "topic": "Unit Circle Recap",
+        "detail_level": "Defined",
+        "description": "Summary of key concepts: unit circle properties, coordinate definitions, and wave generation."
+      }
+    ],
+    "potential_issues": [],
+    "presentation_analysis": {
+      "visual_style": "Digital slides with clean vector graphics and dynamic animations.",
+      "ai_slop_detected": [],
+      "audio_pacing": "Moderate",
+      "audio_transition_audit": {
+        "vocal_consistency": "The TTS narration is consistent in tone and pitch across all slide transitions.",
+        "glitches": []
+      },
+      "visual_content_alignment": {
+        "score": "High",
+        "observation": "The visuals track the narration perfectly; for example, at 03:45 and 04:21, the animations of the point moving around the unit circle are synchronized with the real-time plotting of the sine and cosine waves."
+      },
+      "visual_accessibility_audit": {
+        "issues": []
+      }
+    },
+    "observation_summary": "This video provides a high-quality conceptual introduction to trigonometric functions suitable for AP/IB level students. It effectively transitions from right-triangle trigonometry to the unit circle, providing clear derivations for sine and cosine as coordinates. The use of dynamic animations to show how these coordinates generate periodic wave graphs is a significant pedagogical strength. The content is accurate, well-paced, and logically structured.",
+    "curriculum_coverage_checklist": []
+  },
+  "agent2_report": {
+    "primary_language": "english",
+    "content_overview": {
+      "teaching_mode": "Conceptual",
+      "content_map_size": 11
+    },
+    "pedagogical_depth": {
+      "scaffolding_failure_level": 1,
+      "scaffolding_failure_evidence": "The video provides a clear derivation of sine and cosine as coordinates (01:24) and uses dynamic visual analogies to explain the transition from circular motion to wave graphs (03:45), which is superior to standard formula-based instruction.",
+      "pure_calculation_bias_level": 1,
+      "pure_calculation_bias_evidence": "The video is entirely concept-driven, focusing on the 'why' and 'how' of trigonometric functions rather than repetitive drill-and-kill calculations."
+    },
+    "completeness": {
+      "content_completeness_level": 0,
+      "content_completeness_evidence": "Covers all foundational aspects of trigonometric functions expected in an introductory video, including standard position, the unit circle, radians, and graph generation.",
+      "explanatory_depth_level": 1,
+      "explanatory_depth_evidence": "The depth is exceptional for a 6-minute video, particularly the visual synchronization of the unit circle's y-coordinate with the sine wave's amplitude over time.",
+      "key_learning_points_coverage": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    "accuracy_flags": {
+      "title_depth_mismatch_level": 0,
+      "title_depth_mismatch_evidence": "The content perfectly matches the introductory scope suggested by the title 'Trigonometric Functions (1)'.",
+      "visual_alignment_issue_level": 1,
+      "visual_alignment_issue_evidence": "Exceptional alignment; the dynamic vector graphics and real-time plotting of waves (03:45, 04:21) directly support and clarify the mathematical concepts being narrated.",
+      "critical_fact_error_count": 0,
+      "critical_fact_error_evidence": "None identified.",
+      "minor_slip_count": 0,
+      "minor_slip_evidence": "None identified."
+    },
+    "logic_flags": {
+      "causal_inconsistency_count": 0,
+      "information_overload_count": 0
+    },
+    "verified_errors": [],
+    "scoring_rationale": "This is a high-quality conceptual video. It excels in scaffolding by deriving functions from the unit circle and provides exceptional visual alignment that aids in understanding the relationship between circular motion and periodic waves. No accuracy or logic issues were detected.",
+    "accuracy_score": 4.8,
+    "logic_score": 4.75,
+    "score_breakdown": {
+      "accuracy_steps": "Base: 4.0 → = 4.80 (+1×4)",
+      "logic_steps": "Base: 4.0 → = 4.75 (+1×3)"
+    }
+  },
+  "agent3_simulation": {
+    "experiential_context": {
+      "signaling_effectiveness": "The video uses exceptional color-coding (red for sine/y-axis and green for cosine/x-axis) that persists from the unit circle derivation through to the wave graphs. This directly helps a student who previously only saw these as 'memorized values' to see them as dynamic coordinates.",
+      "pacing_analysis": "At roughly 7 minutes, the video fits perfectly within the student's 15-minute focus window. The transition from static right triangles to circular motion is handled at a deliberate speed that allows for mental mapping.",
+      "visual_quality_assessment": "The visuals are high-contrast vector graphics. The use of dynamic plotting (showing the wave grow as the point rotates) is a high-quality instructional choice that prevents cognitive overload.",
+      "cognitive_friction_points": [
+        {
+          "timestamp": "03:05",
+          "issue": "Rapid introduction of Radians",
+          "reason": "While the explanation is geometrically sound, the jump from degrees to radians is a common friction point for 12th graders. A brief side-by-side comparison of a few common angles (30, 45, 60) in both units might have smoothed the transition."
+        }
+      ],
+      "positive_moment": {
+        "timestamp": "01:25",
+        "what_works": "The derivation of x=cos and y=sin using a hypotenuse of 1 is the perfect bridge for a student who 'Has: basic trigonometry' but 'Lacks: conceptual understanding.' It turns a formula into a spatial reality."
+      }
+    },
+    "audit_log": {
+      "adaptability_flags": {
+        "jargon_overload_level": 0,
+        "jargon_evidence": "Terms like 'terminal arm' and 'standard position' are introduced with clear visual labels, making them accessible to a 12th grader.",
+        "prerequisite_gap_level": 0,
+        "prerequisite_evidence": "The video explicitly builds on SOH CAH TOA to explain the unit circle, perfectly matching the student's 'Has' and 'Lacks' profile.",
+        "pacing_mismatch_level": 0,
+        "pacing_evidence": "The delivery is steady and avoids tangents, respecting the 15-minute focus limit.",
+        "visual_accessibility_level": 0,
+        "accessibility_evidence": "Text is large, high-contrast, and the color-coding is distinct.",
+        "missing_scaffolding_level": 0,
+        "scaffolding_evidence": "The transition from the unit circle to the sine/cosine waves provides the necessary intuitive ramp the student needs.",
+        "ineffective_visual_representation_level": 1,
+        "ineffective_visual_evidence": "The simultaneous display of the unit circle rotation and the wave plotting (03:45) is an exemplary use of dynamic visuals to explain a complex concept."
+      },
+      "engagement_flags": {
+        "monotone_audio_level": 0,
+        "monotone_evidence": "The TTS has appropriate emphasis on key terms like 'coordinates' and 'rotation,' maintaining engagement.",
+        "ai_generated_fatigue_level": 0,
+        "ai_fatigue_evidence": "The graphics are clean, purposeful, and avoid generic stock imagery.",
+        "visual_clutter_level": 0,
+        "clutter_evidence": "Slides use ample white space and concise bullet points.",
+        "disconnect_level": 1,
+        "disconnect_evidence": "The alignment between the narration and the animations is perfect, particularly during the wave generation segments.",
+        "decorative_eye_candy_level": 0,
+        "decorative_eye_candy_evidence": "Animations are strictly functional and support the learning objectives.",
+        "visual_signaling_level": 1,
+        "visual_signaling_evidence": "Consistent use of color-coding and progressive reveals (boxing the coordinates) guides the eye exactly where it needs to be."
+      }
+    },
+    "top_fix_suggestion": "Incorporate the Pythagorean Identity (sin²θ + cos²θ = 1) immediately after the coordinate derivation on Slide 4. Since the student is in 12th grade and just saw the unit circle equation (x² + y² = 1), connecting it to the trig identity would provide a powerful 'aha' moment that solidifies the coordinate concept.",
+    "subjective_scores": {
+      "adaptability": {
+        "score": 4.25,
+        "calculation": "Base: 4.0 → = 4.25 (+1×1)"
+      },
+      "engagement": {
+        "score": 4.67,
+        "calculation": "Base: 4.0 → = 4.67 (+1×2)"
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "videos": [
+    {
+      "video_url": "https://www.youtube.com/watch?v=aircAruvnKk",
+      "course_requirement": "Big Concept: AI Agent Topic: LLM Hallucination vs. Retrieval-Augmented Generation Bloom's Taxonomy: understand, remember, apply Learning Goal: Deliver a clear explanation of what LLM hallucination is and why language models can sometimes generate incorrect or fabricated information. Help students understand how retrieval-augmented generation (RAG) can reduce hallucination by incorporating external documents into the response process, while also explaining why retrieved documents do not always guarantee correctness. Use intuitive examples such as factual question answering, search-assisted chatbots, or misinformation scenarios to illustrate both the strengths and limitations of RAG systems. Key Learning Points: LLM hallucination; retrieval-augmented generation; external knowledge retrieval; limitations of retrieved evidence; judging answer reliability; situations where RAG can still fail",
+      "category": "CS",
+      "personas": [
+        {
+          "student_persona": "Grade: 10th grade Focus Time: 15 minutes Background Knowledge: Has: Regular experience using AI chatbots and search engines. Understands that AI systems can sometimes make mistakes or provide inconsistent answers. Lacks: Knowledge of how language models generate responses, what hallucination technically means, and how retrieval systems are integrated into AI assistants."
+        },
+        {
+          "student_persona": "Grade: 1st-year university student Focus Time: 8 minutes Background Knowledge: Has: Introductory understanding of machine learning and natural language processing concepts. Familiar with large language models and basic retrieval systems. Lacks: Deep understanding of why hallucinations occur internally in LLMs, how retrieval-augmented generation changes the inference pipeline, and why retrieved documents may still contain irrelevant or misleading evidence." 
+        }
+      ]
+    }
+  ]
+}

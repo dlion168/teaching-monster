@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS
+.DS_Store
+
+# Secrets
+.env
+storage_state.json
+*cookies.txt
+
+# Generated inputs and outputs
+inputs/
+output/
+tmp/
+eval_results/
+temp_videos/
+batch_work/
+baselines/retrieval/corpus/
+*.mp4

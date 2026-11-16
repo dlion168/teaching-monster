@@ -1,0 +1,1 @@
+notebooklm-py==0.3.4   # unofficial reverse-engineered client; no public API exists
