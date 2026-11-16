@@ -1,108 +1,54 @@
-# Static Retrieval Baseline
+# Retrieval Baseline
 
-Returns an existing Creative-Commons video instead of generating one, and uses
-no generative language model at any stage. This folder is self-contained: it
-depends on nothing outside itself.
+Instead of generating a video, this baseline picks the best-matching existing video from YouTube, among videos released under a Creative Commons licence. It uses no generative model. It shows how well an AI-made video does compared with simply finding a good existing one.
 
-It reads the same input file and writes the same record format as the NotebookLM
-baseline in `../notebooklm`, so the two sets of results can be joined on `item_id`.
+## How it works
 
-## The contract
+1. **Build a video collection.** Search YouTube with words from the topics, keep only Creative Commons videos between 1 and 45 minutes long, and download their English subtitles. The collection is saved to `corpus/assets.jsonl` and reused.
+2. **Rank the videos for each topic.** A small ranking model (`cross-encoder/ms-marco-MiniLM-L-6-v2`) scores how well each video's title, description and most relevant subtitle passage match the course requirement. The passage is found with `BAAI/bge-small-en-v1.5`.
+3. **Adjust for the student.** Videos much longer or shorter than the student's focus time lose points. If a topic line has a `subject` field (for example `"subject": "Physics"`), videos on other subjects lose points too. The top video is returned.
 
-The baseline is a pure function of the two input fields an item provides:
+Only the course requirement is used for matching. From the student persona, only the focus time is used.
 
-```
-(course_requirement, learner_persona)  ->  VideoResult
-```
-
-Nothing else about an item is visible to it. Items are read from a JSONL file,
-one object per line:
-
-```json
-{"item_id": "1", "course_requirement": "...", "learner_persona": "...", "subject": "Physics"}
-```
-
-`subject` is an optional extra key, read only for the off-subject penalty; when
-absent that penalty never fires. Any other keys are carried through untouched in
-`Item.meta` and ignored. `VideoResult` carries `url` (an existing video) — never
-`path` — alongside `title`, `duration_s`, `relevance`, `low_confidence`,
-`error`, and a `detail` dictionary holding provenance. A failing item returns a
-record with `error` set rather than aborting the run.
-
-## Usage
+## Setup
 
 ```bash
 pip install -r requirements.txt
+```
 
-python run.py --items ../../inputs/items.jsonl --corpus corpus/assets.jsonl
+`yt-dlp` is used to search YouTube and read subtitles. A GPU speeds up ranking but is not required.
+
+## Run
+
+```bash
+python run.py --items ../../inputs/items.jsonl
 ```
 
 `../../inputs/items.jsonl` is written by `prepare_inputs.py` at the repository root.
-No corpus is included in this repository. If `corpus/assets.jsonl` does not exist,
-the first run builds it from YouTube (slow, but cached and resumable); later runs
-reuse it. Add `--harvest` to rebuild it. Because search results change over time,
-a newly built corpus will differ from the one used in the paper.
 
-`--out` sets the JSONL destination (default `results_retrieval.jsonl`).
+The first run builds the video collection, which takes a while; later runs reuse it. YouTube search results change over time, so a new collection will differ from the one used in the paper.
 
-## Method
+| Option | Default | Meaning |
+| --- | --- | --- |
+| `--items` | (required) | Topics to find videos for |
+| `--corpus` | `corpus/assets.jsonl` | The video collection |
+| `--harvest` | off | Rebuild the collection even if it exists |
+| `--out` | `results_retrieval.jsonl` | Results file |
 
-Two steps: build a fixed corpus, then rank it for instructional relevance.
+## Output
 
-**Corpus.** YouTube search under the Creative Commons licence filter; a video is
-kept only if its platform metadata confirms a CC licence and its duration falls
-between 60 and 2700 seconds. Deduplication is by video id, and English
-transcripts are fetched, preferring a manual track over automatic captions.
-Search terms are derived from the items themselves. The result is written once
-and then frozen — `--harvest` is the only path that touches the network.
+The results file has one line per topic:
 
-**Ranking.** A cross-encoder (`cross-encoder/ms-marco-MiniLM-L-6-v2`) reads the
-request and the candidate video together and scores how well the video's content
-matches the request, capturing instructional relevance rather than surface
-keyword overlap. Because a full transcript exceeds the model's 512-token window,
-a bi-encoder (`BAAI/bge-small-en-v1.5`, in the Sentence-BERT sense) first locates
-each video's most request-relevant passage; the candidate is then represented as
-`title + description[:400] + passage[:1200]`. This is a passage locator, not a
-recall filter — every video in the corpus reaches the reranker, and no candidate
-cutoff is applied.
-
-Two adjustments are then applied to the reranker score: an off-subject penalty
-of 3.0, and a duration penalty of `2.0 × (1 − f)`, where `f` equals 1 when the
-video runs between 0.4 and 1.5 times the attention span and decays to 0 at 3
-times the span. The top-ranked video is returned.
-
-The query is built from the `course_requirement` alone — subject, big idea,
-topic, learning objectives, and key knowledge points. Bloom's Cognitive Levels is
-parsed but excluded, since it describes the intended cognitive operation rather
-than the subject matter. The attention span is the only persona signal admitted,
-and it enters solely as a duration constraint: the `learner_persona` is
-deliberately kept out of content matching so that personalization is not
-inflated, which is what makes this baseline a calibration point for the Learner
-Adaptability dimension.
-
-A result whose reranker logit falls below 0 is flagged `low_confidence`. The flag
-is diagnostic — it marks a probable corpus gap and does not change which video is
-returned.
-
-## Layout
-
-```
-run.py                 CLI
-items.py               contract: Item, VideoResult, input parsing
-retrieval.py           the baseline
-requirements.txt
-tests/test_smoke.py    offline tests
+```json
+{"item_id": "112", "method": "retrieval", "url": "https://www.youtube.com/watch?v=...", "title": "...", "duration_s": 540, "relevance": 0.83, "low_confidence": false, "error": null, "detail": {...}}
 ```
 
-Configuration — model checkpoints, thresholds, penalties — is inlined at the top
-of `retrieval.py` rather than kept in a separate config file.
+`relevance` is the ranking model's score from 0 to 1. `low_confidence` is true when that score is below 0.5, which usually means the collection has no good video for the topic.
 
-`tests/test_smoke.py` asserts the claims this description rests on — that the
-query is built from the `course_requirement` alone, that Bloom's is excluded,
-that the persona enters only as the duration constraint, and that passage
-chunking locates rather than filters. It runs without network access and without
-`torch` or `transformers`, all of it being independent of the model weights.
+## Tests
 
 ```bash
 python tests/test_smoke.py
 ```
+
+The tests check how the search query and the length adjustment are computed. They need no network and no model downloads.

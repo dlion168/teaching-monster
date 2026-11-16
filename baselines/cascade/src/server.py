@@ -2,7 +2,7 @@
 FastAPI server for video generation API.
 
 This server implements the POST /v1/video/generate endpoint as specified
-in docs/api/video-generation.md
+in docs/api/spec.json
 """
 
 import asyncio

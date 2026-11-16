@@ -5,10 +5,16 @@
     python prepare_inputs.py --stage final         # final-round topics and videos only
     python prepare_inputs.py --data-dir ./data     # read local CSVs instead of the Hub
 
+    python prepare_inputs.py --results baselines/notebooklm/results_notebooklm.jsonl
+                                                   # judge input for videos a baseline made
+
 Writes two files to --out-dir (default ./inputs):
 
-    items.jsonl        one topic per line, the input format of the three baselines
-    judge_input.json   one video per line item, the input format of the LLM judge
+    items.jsonl        the topics, in the input format of the three baselines
+    judge_input.json   the videos to score, in the input format of the LLM judge
+
+By default judge_input.json lists the challenge videos. With --results it lists
+the videos in a baseline's results file instead, paired with their topics.
 """
 from __future__ import annotations
 
@@ -43,6 +49,7 @@ def main() -> int:
     ap.add_argument("--stage", choices=["preliminary_1", "preliminary_2", "final"],
                     help="keep only one stage")
     ap.add_argument("--competitor-id", type=int, help="judge input: keep only this competitor's videos")
+    ap.add_argument("--results", help="judge input: score the videos in this baseline results JSONL")
     args = ap.parse_args()
 
     topics = load_table("topics", args.data_dir)
@@ -66,11 +73,25 @@ def main() -> int:
                 "stage": t["stage"],
             }, ensure_ascii=False) + "\n")
 
+    if args.results:
+        videos = []
+        for line in open(args.results, encoding="utf-8"):
+            if not line.strip():
+                continue
+            r = json.loads(line)
+            source = r.get("path") or r.get("url")
+            if r.get("error") or not source or int(r["item_id"]) not in by_topic:
+                continue
+            if r.get("path") and not Path(source).is_absolute():
+                # Baselines write paths relative to their own folder.
+                source = str((Path(args.results).resolve().parent / source).resolve())
+            videos.append({"video_id": r["item_id"], "video_url": source, "topic_id": r["item_id"]})
+
     judge_videos = []
     for v in videos:
         t = by_topic[int(v["topic_id"])]
         judge_videos.append({
-            "video_id": int(v["video_id"]),
+            "video_id": v["video_id"],
             "video_url": v["video_url"],
             "course_requirement": t["course_requirement"],
             "student_persona": t["student_persona"],

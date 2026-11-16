@@ -3,8 +3,10 @@
 
     python run_items.py --items ../../inputs/items.jsonl --out-dir ./output
 
-Each item becomes <out-dir>/<item_id>.mp4. Items whose video already exists are
-skipped, so an interrupted run can be resumed by running the same command again.
+Each item becomes <out-dir>/<item_id>.mp4, and results_cascade.jsonl lists one
+record per item in the same format as the other two baselines. Items whose video
+already exists are skipped, so an interrupted run can be resumed by running the
+same command again.
 """
 from __future__ import annotations
 
@@ -22,6 +24,7 @@ def main() -> int:
     ap.add_argument("--items", required=True, help="items.jsonl written by prepare_inputs.py")
     ap.add_argument("--out-dir", default="output")
     ap.add_argument("--config", default="config/default.yaml")
+    ap.add_argument("--out", default="results_cascade.jsonl", help="output JSONL")
     args = ap.parse_args()
 
     out_dir = Path(args.out_dir).resolve()
@@ -29,19 +32,28 @@ def main() -> int:
     items = [json.loads(line) for line in open(args.items, encoding="utf-8") if line.strip()]
 
     failed = 0
+    records = []
     for item in items:
         name = f"{item['item_id']}.mp4"
-        if (out_dir / name).exists():
+        video = out_dir / name
+        if video.exists():
             print(f"[skip] {name} exists")
-            continue
-        print(f"[run] item {item['item_id']}")
-        cmd = [sys.executable, "-m", "scripts.T2V_pipeline",
-               "-r", item["course_requirement"], "-p", item["learner_persona"],
-               "-c", args.config, "-o", name, "-d", str(out_dir)]
-        if subprocess.run(cmd, cwd=HERE).returncode != 0:
-            failed += 1
-            print(f"[error] item {item['item_id']} failed")
-    print(f"done: {len(items) - failed}/{len(items)} items")
+        else:
+            print(f"[run] item {item['item_id']}")
+            cmd = [sys.executable, "-m", "scripts.T2V_pipeline",
+                   "-r", item["course_requirement"], "-p", item["learner_persona"],
+                   "-c", args.config, "-o", name, "-d", str(out_dir)]
+            subprocess.run(cmd, cwd=HERE)
+        ok = video.exists()
+        failed += not ok
+        records.append({"item_id": item["item_id"], "method": "cascade",
+                        "path": str(video) if ok else None,
+                        "error": None if ok else "generation failed"})
+
+    with open(args.out, "w", encoding="utf-8") as f:
+        for r in records:
+            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+    print(f"done: {len(items) - failed}/{len(items)} items -> {args.out}")
     return 1 if failed else 0
 
 

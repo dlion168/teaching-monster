@@ -12,6 +12,8 @@ The organisers' own teaching-video generator. It turns a course requirement and 
 
 The settings match Table 5 of the paper's appendix.
 
+Planning has three steps: *context analysis* reads the request and the student, *storyboard* writes the lesson plan, and *wrapper* turns the plan into slide specifications and a narration script. The pointer stage has two: *grouping* splits each slide's narration into phrases, and *grounding* finds the point on the slide that each phrase talks about.
+
 | Stage | Model | Where it is set |
 | --- | --- | --- |
 | Context analysis | gemini-3-flash-preview | `src/outline/t2v_outline.py` |
@@ -25,7 +27,7 @@ The settings match Table 5 of the paper's appendix.
 | Pointer grounding | UI-TARS-1.5-7B, 4-bit | `src/cursor/` |
 | Compilation | moviepy, 15 fps | `scripts/T2V_pipeline.py` |
 
-Table 5 also lists an image-check step (gemini-3.1-pro-preview, temperature 0.2). That step is not part of this code.
+Table 5 also lists an image-check step (gemini-3.1-pro-preview, temperature 0.2), which is not in this code. Videos generated with this code may therefore differ from the cascade videos evaluated in the paper.
 
 ## Requirements
 
@@ -33,6 +35,7 @@ Table 5 also lists an image-check step (gemini-3.1-pro-preview, temperature 0.2)
 - An NVIDIA GPU with about 20 GB of memory, for text to speech and the two pointer models
 - LibreOffice and Poppler, to turn slides into images
 - A Gemini API key
+- Time and cost: each video makes many Gemini calls (planning, plus a design-and-review loop for every slide)
 
 ## Setup
 
@@ -60,6 +63,8 @@ All challenge topics, using the `items.jsonl` written by `prepare_inputs.py` at 
 python run_items.py --items ../../inputs/items.jsonl --out-dir ./output
 ```
 
-Each topic becomes `output/<topic_id>.mp4`. Intermediate files (storyboard, slides, audio, pointer paths) are kept in `./tmp/`.
+Each topic becomes `output/<topic_id>.mp4`. `results_cascade.jsonl` lists one line per topic with `item_id`, `method`, `path` (absolute) and `error`, which is enough for `prepare_inputs.py --results`. Running the command again skips topics that already have a video. Use `--config` to choose another config file and `--out` to rename the results file.
 
-The pipeline can also run as a web service: start it with `python src/server.py` and call it with `scripts/api_client.py`.
+Intermediate files (storyboard, slides, audio, pointer paths) are written to `./tmp/` and are overwritten by the next topic.
+
+The pipeline can also run as a web service: start it with `python -m src.server` from this folder and call it with `scripts/api_client.py`.

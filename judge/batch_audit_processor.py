@@ -299,7 +299,12 @@ def _count_agent_plus_one_levels(*values) -> int:
 # ============================================================================
 
 async def download_video_async(url: str, task_idx: int, total: int) -> Tuple[str, Path]:
-    """異步下載 YouTube 影片"""
+    """Fetch a video with yt-dlp, or use it directly if `url` is a local file path."""
+    local = Path(url).expanduser()
+    if local.is_file():
+        print(f"[{task_idx}/{total}] Using local video: {local}")
+        return local.stem, local.resolve()
+
     output_tmpl = str(TEMP_DOWNLOAD_DIR / "%(id)s.%(ext)s")
 
     print(f"[{task_idx}/{total}] Downloading video: {url}")
@@ -1817,9 +1822,11 @@ async def main():
     print("PHASE 5: CLEANUP")
     print("=" * 80)
     
-    # Clean up temporary videos
+    # Clean up downloaded videos (local input files are never deleted)
+    temp_dir = TEMP_DOWNLOAD_DIR.resolve()
     for task in tasks:
-        if task.video_path and task.video_path.exists():
+        if (task.video_path and task.video_path.exists()
+                and task.video_path.resolve().parent == temp_dir):
             try:
                 task.video_path.unlink()
                 print(f"✓ Deleted: {task.video_path.name}")
